@@ -217,6 +217,11 @@ int main(int argc, char *argv[])
 	file.open(argv[1], ios::in);
 	file >> All_Goods;
 	file >> All_Trades; //ввод количество товаров,количество сделок
+	if (All_Trades <= 0 || All_Goods <= 0)
+	{
+		cout << "the number of trades or goods is forgotten to be put in the file " << endl;
+		return 0;
+	}
 	cout << All_Goods << endl;
 	cout << All_Trades << endl;
 	file.close();
