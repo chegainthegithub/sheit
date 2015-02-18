@@ -2,32 +2,6 @@
 #include <vector>
 #include <fstream>
 using namespace std;
-void Treeconstr(int *a, unsigned size)
-{
-	for (int i = 0; i < size; i++)
-	{
-		int n = i;
-		for (int j = i / 2; j >= 0; j--)
-			if (a[n]>a[j])
-			{
-			swap(a[n], a[j]);
-			n = j;
-			for (int k = 0; k < size; k++)
-				cout << a[k] << " ";
-			cout << endl;
-			}
-	}
-}
-void HeapSort(int *a, unsigned size)
-{
-	unsigned size2 = size - 1;
-	for (int i = 0; i < size - 2; i++)
-	{
-		swap(a[0], a[size2]);
-		size2 = size2 - 1;
-		Treeconstr(a, size2);
-	}
-}
 void qs(int* arr, int first, int last)
 {
 	int i = first, j = last, x = arr[(first + last) / 2];
@@ -146,9 +120,9 @@ vector<int> the_arr(int All_Goods, int num, int Number_Trades,char *name)
 			int *True_arr3 = new int[new_arr_size];
 			for (int local3 = 0; local3 < new_arr_size; local3++)
 				True_arr3[local3] = True_arr2[local3];
-			HeapSort(True_arr3,new_arr_size - 1);
+			qs(True_arr3,0,new_arr_size-1); // сортировка массива по возрастанию True_arr3
 			delete[]True_arr2;
-			// сортировка массива по возрастанию True_arr3
+			
 
 		vector<vector<int>> Matrix_local = matrix_creator(True_arr3, num, Trade_Goods); // матрица сочетаний данной строки по num
 		int limit = Matrix_local.size(); // количество комбинаций
@@ -227,6 +201,7 @@ int main(int argc, char *argv[])
 	file.close();
 	file.open(argv[1], ios::in);
 	int num = 1;
+	cout << "possible number of combinations is " << All_Goods << endl;
 	for (int i = 1; i <= All_Goods; i++)
 	{
 	int size = i;
